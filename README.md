@@ -1,6 +1,6 @@
-# Agentic Debugger Laravel SDK
+# FixStack Laravel SDK
 
-AI-powered error monitoring for Laravel applications. Captures exceptions and sends them to the [Agentic Debugger](https://agentic-debugger.com) platform for automated root cause analysis.
+AI-powered error monitoring for Laravel applications. Captures exceptions and sends them to the [FixStack](https://fixstack.dev) platform for automated root cause analysis.
 
 ## Requirements
 
@@ -10,7 +10,7 @@ AI-powered error monitoring for Laravel applications. Captures exceptions and se
 ## Installation
 
 ```bash
-composer require agentic-debugger/laravel
+composer require fixstack/laravel
 ```
 
 The service provider is auto-discovered — no manual registration needed.
@@ -20,20 +20,20 @@ The service provider is auto-discovered — no manual registration needed.
 1. Add your credentials to `.env`:
 
 ```env
-AGENTIC_DEBUGGER_API_KEY=pk_your_api_key_here
-AGENTIC_DEBUGGER_ENDPOINT=https://app.agentic-debugger.com
+FIXSTACK_API_KEY=pk_your_api_key_here
+FIXSTACK_ENDPOINT=https://app.fixstack.dev
 ```
 
 2. (Optional) Publish the config file:
 
 ```bash
-php artisan vendor:publish --tag=agentic-debugger-config
+php artisan vendor:publish --tag=fixstack-config
 ```
 
 3. Test the connection:
 
 ```bash
-php artisan agentic-debugger:test
+php artisan fixstack:test
 ```
 
 ## Usage
@@ -68,12 +68,12 @@ Each error report includes:
 
 | Option | Env Variable | Default | Description |
 |---|---|---|---|
-| `enabled` | `AGENTIC_DEBUGGER_ENABLED` | `true` | Enable/disable error reporting |
-| `endpoint` | `AGENTIC_DEBUGGER_ENDPOINT` | `https://app.agentic-debugger.com` | Platform API URL |
-| `api_key` | `AGENTIC_DEBUGGER_API_KEY` | — | Project API key (from Settings) |
-| `async` | `AGENTIC_DEBUGGER_ASYNC` | `true` | Send errors via queue (recommended) |
-| `queue_connection` | `AGENTIC_DEBUGGER_QUEUE` | `null` | Queue connection (null = default) |
-| `sample_rate` | `AGENTIC_DEBUGGER_SAMPLE_RATE` | `1.0` | 0.0–1.0, percentage of errors to report |
+| `enabled` | `FIXSTACK_ENABLED` | `true` | Enable/disable error reporting |
+| `endpoint` | `FIXSTACK_ENDPOINT` | `https://app.fixstack.dev` | Platform API URL |
+| `api_key` | `FIXSTACK_API_KEY` | — | Project API key (from Settings) |
+| `async` | `FIXSTACK_ASYNC` | `true` | Send errors via queue (recommended) |
+| `queue_connection` | `FIXSTACK_QUEUE` | `null` | Queue connection (null = default) |
+| `sample_rate` | `FIXSTACK_SAMPLE_RATE` | `1.0` | 0.0–1.0, percentage of errors to report |
 | `environments` | — | `['production', 'staging']` | Only report in these environments |
 | `timeout` | — | `5` | HTTP timeout in seconds |
 
@@ -85,7 +85,7 @@ By default, the following exceptions are not reported:
 - `Illuminate\Validation\ValidationException`
 - `Symfony\Component\HttpKernel\Exception\NotFoundHttpException`
 
-Customize in `config/agentic-debugger.php`:
+Customize in `config/fixstack.php`:
 
 ```php
 'ignored_exceptions' => [
@@ -98,7 +98,7 @@ Customize in `config/agentic-debugger.php`:
 
 ### Data Sanitization
 
-Sensitive data is automatically redacted before sending. Configure patterns in `config/agentic-debugger.php`:
+Sensitive data is automatically redacted before sending. Configure patterns in `config/fixstack.php`:
 
 ```php
 // Headers containing these strings are redacted
@@ -112,7 +112,7 @@ Sensitive data is automatically redacted before sending. Configure patterns in `
 
 **Async (default):** Errors are sent via a queued job. Zero performance impact on your application. Requires a queue worker running (`php artisan queue:work`).
 
-**Sync:** Errors are sent immediately during the request. Useful for testing or when no queue is available. Set `AGENTIC_DEBUGGER_ASYNC=false`.
+**Sync:** Errors are sent immediately during the request. Useful for testing or when no queue is available. Set `FIXSTACK_ASYNC=false`.
 
 ## License
 
