@@ -1,6 +1,6 @@
 <?php
 
-namespace AgenticDebugger\Laravel\Context;
+namespace FixStack\Laravel\Context;
 
 class ContextCollector
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace AgenticDebugger\Laravel\Transport;
+namespace FixStack\Laravel\Transport;
 
-use AgenticDebugger\Laravel\Jobs\SendErrorJob;
+use FixStack\Laravel\Jobs\SendErrorJob;
 
 class AsyncTransport implements TransportInterface
 {
     public function send(array $payload): void
     {
-        $connection = config('agentic-debugger.queue_connection');
+        $connection = config('fixstack.queue_connection');
 
         SendErrorJob::dispatch($payload)->onConnection($connection);
     }

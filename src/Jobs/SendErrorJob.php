@@ -1,6 +1,6 @@
 <?php
 
-namespace AgenticDebugger\Laravel\Jobs;
+namespace FixStack\Laravel\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -25,23 +25,23 @@ class SendErrorJob implements ShouldQueue
 
     public function handle(): void
     {
-        $endpoint = rtrim(config('agentic-debugger.endpoint'), '/');
+        $endpoint = rtrim(config('fixstack.endpoint'), '/');
 
-        $response = Http::timeout(config('agentic-debugger.timeout', 5))
+        $response = Http::timeout(config('fixstack.timeout', 5))
             ->withHeaders([
-                'X-API-Key' => config('agentic-debugger.api_key'),
-                'User-Agent' => 'AgenticDebugger-Laravel-SDK/1.0',
+                'X-API-Key' => config('fixstack.api_key'),
+                'User-Agent' => 'FixStack-Laravel-SDK/1.0',
             ])
             ->post("{$endpoint}/api/v1/errors", $this->payload);
 
         if ($response->status() >= 500 || $response->status() === 429) {
-            throw new \RuntimeException("Agentic Debugger API error: {$response->status()}");
+            throw new \RuntimeException("FixStack API error: {$response->status()}");
         }
     }
 
     public function failed(\Throwable $e): void
     {
-        Log::channel('single')->warning('Agentic Debugger: failed to send error after retries', [
+        Log::channel('single')->warning('FixStack: failed to send error after retries', [
             'error' => $e->getMessage(),
         ]);
     }

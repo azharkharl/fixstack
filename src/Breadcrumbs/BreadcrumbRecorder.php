@@ -1,6 +1,6 @@
 <?php
 
-namespace AgenticDebugger\Laravel\Breadcrumbs;
+namespace FixStack\Laravel\Breadcrumbs;
 
 class BreadcrumbRecorder
 {
@@ -8,7 +8,7 @@ class BreadcrumbRecorder
 
     public function record(string $message, string $category = 'default'): void
     {
-        if (!config('agentic-debugger.breadcrumbs.enabled', true)) {
+        if (!config('fixstack.breadcrumbs.enabled', true)) {
             return;
         }
 
@@ -18,7 +18,7 @@ class BreadcrumbRecorder
             timestamp: now()->toIso8601String(),
         );
 
-        $max = config('agentic-debugger.breadcrumbs.max_items', 50);
+        $max = config('fixstack.breadcrumbs.max_items', 50);
 
         if (count($this->breadcrumbs) > $max) {
             array_shift($this->breadcrumbs);

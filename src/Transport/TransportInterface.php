@@ -1,6 +1,6 @@
 <?php
 
-namespace AgenticDebugger\Laravel\Transport;
+namespace FixStack\Laravel\Transport;
 
 interface TransportInterface
 {

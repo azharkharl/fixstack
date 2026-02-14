@@ -1,9 +1,9 @@
 <?php
 
-namespace AgenticDebugger\Laravel;
+namespace FixStack\Laravel;
 
-use AgenticDebugger\Laravel\Breadcrumbs\BreadcrumbRecorder;
-use AgenticDebugger\Laravel\Transport\TransportInterface;
+use FixStack\Laravel\Breadcrumbs\BreadcrumbRecorder;
+use FixStack\Laravel\Transport\TransportInterface;
 use Illuminate\Support\Facades\Log;
 
 class ErrorReporter
@@ -17,7 +17,7 @@ class ErrorReporter
     public function report(\Throwable $exception): void
     {
         try {
-            if (!config('agentic-debugger.enabled', true)) {
+            if (!config('fixstack.enabled', true)) {
                 return;
             }
 
@@ -37,7 +37,7 @@ class ErrorReporter
 
             $this->transport->send($payload);
         } catch (\Throwable $e) {
-            Log::channel('single')->debug('Agentic Debugger: failed to report error', [
+            Log::channel('single')->debug('FixStack: failed to report error', [
                 'error' => $e->getMessage(),
             ]);
         }
@@ -45,7 +45,7 @@ class ErrorReporter
 
     protected function shouldReportEnvironment(): bool
     {
-        $environments = config('agentic-debugger.environments', []);
+        $environments = config('fixstack.environments', []);
 
         if (empty($environments)) {
             return true;
@@ -56,7 +56,7 @@ class ErrorReporter
 
     protected function shouldIgnore(\Throwable $exception): bool
     {
-        $ignored = config('agentic-debugger.ignored_exceptions', []);
+        $ignored = config('fixstack.ignored_exceptions', []);
 
         foreach ($ignored as $ignoredClass) {
             if ($exception instanceof $ignoredClass) {
@@ -69,7 +69,7 @@ class ErrorReporter
 
     protected function shouldSample(): bool
     {
-        $rate = (float) config('agentic-debugger.sample_rate', 1.0);
+        $rate = (float) config('fixstack.sample_rate', 1.0);
 
         if ($rate >= 1.0) {
             return true;

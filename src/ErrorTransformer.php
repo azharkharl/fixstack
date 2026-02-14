@@ -1,8 +1,8 @@
 <?php
 
-namespace AgenticDebugger\Laravel;
+namespace FixStack\Laravel;
 
-use AgenticDebugger\Laravel\Context\ContextCollector;
+use FixStack\Laravel\Context\ContextCollector;
 
 class ErrorTransformer
 {

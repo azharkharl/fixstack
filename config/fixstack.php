@@ -7,17 +7,17 @@ return [
     | Enable/Disable Error Reporting
     |--------------------------------------------------------------------------
     */
-    'enabled' => env('AGENTIC_DEBUGGER_ENABLED', true),
+    'enabled' => env('FIXSTACK_ENABLED', true),
 
     /*
     |--------------------------------------------------------------------------
     | API Endpoint
     |--------------------------------------------------------------------------
     |
-    | The URL of your Agentic Debugger platform instance.
+    | The URL of your FixStack platform instance.
     |
     */
-    'endpoint' => env('AGENTIC_DEBUGGER_ENDPOINT', 'https://app.agentic-debugger.com'),
+    'endpoint' => env('FIXSTACK_ENDPOINT', 'https://app.fixstack.dev'),
 
     /*
     |--------------------------------------------------------------------------
@@ -27,7 +27,7 @@ return [
     | Your project's API key (starts with pk_). Found in Project Settings.
     |
     */
-    'api_key' => env('AGENTIC_DEBUGGER_API_KEY'),
+    'api_key' => env('FIXSTACK_API_KEY'),
 
     /*
     |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
     | Set to false for synchronous sending (useful for testing).
     |
     */
-    'async' => env('AGENTIC_DEBUGGER_ASYNC', true),
+    'async' => env('FIXSTACK_ASYNC', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -49,7 +49,7 @@ return [
     | your application's default queue connection.
     |
     */
-    'queue_connection' => env('AGENTIC_DEBUGGER_QUEUE', null),
+    'queue_connection' => env('FIXSTACK_QUEUE', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -70,7 +70,7 @@ return [
     | report. 1.0 = report all errors, 0.5 = report 50%, 0.0 = report none.
     |
     */
-    'sample_rate' => env('AGENTIC_DEBUGGER_SAMPLE_RATE', 1.0),
+    'sample_rate' => env('FIXSTACK_SAMPLE_RATE', 1.0),
 
     /*
     |--------------------------------------------------------------------------

@@ -12,13 +12,13 @@
     },
     "autoload": {
         "psr-4": {
-            "AgenticDebugger\\Laravel\\": "src/"
+            "FixStack\\Laravel\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "AgenticDebugger\\Laravel\\AgenticDebuggerServiceProvider"
+                "FixStack\\Laravel\\FixStackServiceProvider"
             ]
         }
     },

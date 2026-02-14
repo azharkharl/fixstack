@@ -1,29 +1,29 @@
 <?php
 
-namespace AgenticDebugger\Laravel\Console;
+namespace FixStack\Laravel\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
 class TestCommand extends Command
 {
-    protected $signature = 'agentic-debugger:test';
+    protected $signature = 'fixstack:test';
 
-    protected $description = 'Test connection to the Agentic Debugger platform';
+    protected $description = 'Test connection to the FixStack platform';
 
     public function handle(): int
     {
-        $this->info('Testing Agentic Debugger connection...');
+        $this->info('Testing FixStack connection...');
         $this->newLine();
 
-        $apiKey = config('agentic-debugger.api_key');
+        $apiKey = config('fixstack.api_key');
 
         if (!$apiKey) {
-            $this->error('API key not configured. Set AGENTIC_DEBUGGER_API_KEY in your .env file.');
+            $this->error('API key not configured. Set FIXSTACK_API_KEY in your .env file.');
             return 1;
         }
 
-        $endpoint = rtrim(config('agentic-debugger.endpoint'), '/');
+        $endpoint = rtrim(config('fixstack.endpoint'), '/');
         $this->line("  Endpoint: {$endpoint}");
         $this->line("  API Key:  {$this->maskKey($apiKey)}");
         $this->newLine();
@@ -50,11 +50,11 @@ class TestCommand extends Command
             $response = Http::timeout(10)
                 ->withHeaders([
                     'X-API-Key' => $apiKey,
-                    'User-Agent' => 'AgenticDebugger-Laravel-SDK/1.0',
+                    'User-Agent' => 'FixStack-Laravel-SDK/1.0',
                 ])
                 ->post("{$endpoint}/api/v1/errors", [
-                    'class' => 'AgenticDebugger\\Test\\TestException',
-                    'message' => 'This is a test error from the Agentic Debugger SDK.',
+                    'class' => 'FixStack\\Test\\TestException',
+                    'message' => 'This is a test error from the FixStack Laravel SDK.',
                     'level' => 'warning',
                     'stack_trace' => [
                         [
@@ -88,7 +88,7 @@ class TestCommand extends Command
         }
 
         $this->newLine();
-        $this->info('All checks passed! Agentic Debugger is configured correctly.');
+        $this->info('All checks passed! FixStack is configured correctly.');
 
         return 0;
     }

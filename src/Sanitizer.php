@@ -1,12 +1,12 @@
 <?php
 
-namespace AgenticDebugger\Laravel;
+namespace FixStack\Laravel;
 
 class Sanitizer
 {
     public function sanitizeHeaders(array $headers): array
     {
-        $patterns = config('agentic-debugger.sanitize_headers', []);
+        $patterns = config('fixstack.sanitize_headers', []);
 
         foreach ($headers as $key => $value) {
             foreach ($patterns as $pattern) {
@@ -22,7 +22,7 @@ class Sanitizer
 
     public function sanitizeBody(array $data): array
     {
-        $patterns = config('agentic-debugger.sanitize_body', []);
+        $patterns = config('fixstack.sanitize_body', []);
 
         return $this->redactRecursive($data, $patterns);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace AgenticDebugger\Laravel\Breadcrumbs;
+namespace FixStack\Laravel\Breadcrumbs;
 
 class Breadcrumb
 {

@@ -45,11 +45,11 @@ The SDK automatically captures all unhandled exceptions. No code changes require
 Track user actions leading up to an error:
 
 ```php
-use AgenticDebugger\Laravel\AgenticDebugger;
+use FixStack\Laravel\FixStack;
 
-AgenticDebugger::breadcrumb('User clicked checkout', 'user-action');
-AgenticDebugger::breadcrumb('Payment processing started', 'payment');
-AgenticDebugger::breadcrumb('Stripe API called', 'http');
+FixStack::breadcrumb('User clicked checkout', 'user-action');
+FixStack::breadcrumb('Payment processing started', 'payment');
+FixStack::breadcrumb('Stripe API called', 'http');
 ```
 
 Breadcrumbs are attached to the next error that occurs and provide context for AI analysis.

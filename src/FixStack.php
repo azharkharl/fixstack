@@ -1,10 +1,10 @@
 <?php
 
-namespace AgenticDebugger\Laravel;
+namespace FixStack\Laravel;
 
-use AgenticDebugger\Laravel\Breadcrumbs\BreadcrumbRecorder;
+use FixStack\Laravel\Breadcrumbs\BreadcrumbRecorder;
 
-class AgenticDebugger
+class FixStack
 {
     public static function breadcrumb(string $message, string $category = 'default'): void
     {

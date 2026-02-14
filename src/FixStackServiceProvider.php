@@ -1,29 +1,29 @@
 <?php
 
-namespace AgenticDebugger\Laravel;
+namespace FixStack\Laravel;
 
-use AgenticDebugger\Laravel\Breadcrumbs\BreadcrumbRecorder;
-use AgenticDebugger\Laravel\Console\TestCommand;
-use AgenticDebugger\Laravel\Transport\AsyncTransport;
-use AgenticDebugger\Laravel\Transport\SyncTransport;
-use AgenticDebugger\Laravel\Transport\TransportInterface;
+use FixStack\Laravel\Breadcrumbs\BreadcrumbRecorder;
+use FixStack\Laravel\Console\TestCommand;
+use FixStack\Laravel\Transport\AsyncTransport;
+use FixStack\Laravel\Transport\SyncTransport;
+use FixStack\Laravel\Transport\TransportInterface;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
-class AgenticDebuggerServiceProvider extends ServiceProvider
+class FixStackServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/agentic-debugger.php',
-            'agentic-debugger',
+            __DIR__ . '/../config/fixstack.php',
+            'fixstack',
         );
 
         $this->app->singleton(BreadcrumbRecorder::class);
 
         $this->app->bind(TransportInterface::class, function () {
-            return config('agentic-debugger.async', true)
+            return config('fixstack.async', true)
                 ? new AsyncTransport()
                 : new SyncTransport();
         });
@@ -34,8 +34,8 @@ class AgenticDebuggerServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/../config/agentic-debugger.php' => config_path('agentic-debugger.php'),
-        ], 'agentic-debugger-config');
+            __DIR__ . '/../config/fixstack.php' => config_path('fixstack.php'),
+        ], 'fixstack-config');
 
         if ($this->app->runningInConsole()) {
             $this->commands([TestCommand::class]);
@@ -46,7 +46,7 @@ class AgenticDebuggerServiceProvider extends ServiceProvider
 
     protected function registerExceptionHandler(): void
     {
-        if (!config('agentic-debugger.enabled', true)) {
+        if (!config('fixstack.enabled', true)) {
             return;
         }
 
@@ -62,7 +62,7 @@ class AgenticDebuggerServiceProvider extends ServiceProvider
                     return false; // Allow other reporters to continue
                 });
         } catch (\Throwable $e) {
-            Log::channel('single')->debug('Agentic Debugger: failed to register exception handler', [
+            Log::channel('single')->debug('FixStack: failed to register exception handler', [
                 'error' => $e->getMessage(),
             ]);
         }
