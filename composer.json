@@ -1,6 +1,6 @@
 {
-    "name": "agentic-debugger/laravel",
-    "description": "Laravel SDK for Agentic Debugger — AI-powered error monitoring",
+    "name": "fixstack/laravel",
+    "description": "Laravel SDK for FixStack — AI-powered error monitoring and debugging",
     "type": "library",
     "license": "MIT",
     "keywords": ["laravel", "error-monitoring", "debugging", "ai", "exceptions"],
